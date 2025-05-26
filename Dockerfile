@@ -1,5 +1,4 @@
-FROM openjdk:17
-CMD ["./gradlew", "clean", "build"]
-ARG JAR_FILE=build/libs/*.jar
-COPY ${JAR_FILE} app.jar
+FROM azul/zulu-openjdk:17-latest
+VOLUME /tmp
+COPY build/libs/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
