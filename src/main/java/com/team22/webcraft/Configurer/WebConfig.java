@@ -14,14 +14,16 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LoginCheckInterceptor())
                 .order(1)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/", "/signUp", "/login", "/css/**", "/*.ico", "/error");
+                .excludePathPatterns("/", "/signUp", "/login", "/css/**", "/*.ico", "/error", "/ping");
     }
 
+    /*
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("https://webcraftpc.com")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowCredentials(true);
-    }
+                .allowCredentials(true)
+                .allowedHeaders("*");
+    }*/
 }

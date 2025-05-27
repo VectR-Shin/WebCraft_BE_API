@@ -1,3 +1,4 @@
+/*
 package com.team22.webcraft.Configurer;
 
 import org.apache.tomcat.util.http.Rfc6265CookieProcessor;
@@ -16,3 +17,4 @@ public class CookieConfig {
         };
     }
 }
+*/
