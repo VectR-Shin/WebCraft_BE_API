@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
 public class MapDataDTO {
     private Long id;
 
+    private String owner;
+
     @NotBlank(message = "mapName cannot be empty")
     @Pattern(
             regexp = "^[a-zA-Z0-9]{1,20}$",

@@ -52,7 +52,7 @@ public class MapDataService {
             mapDataList = mapDataRepository.getOwnedMapList(userDataId);
 
         for (MapData md : mapDataList) {
-            dto = new MapDataDTO(md.getId(), md.getMapName(), md.getCreateTime(), md.getLastUpdateTime(), md.getAccessType());
+            dto = new MapDataDTO(md.getId(), md.getUserData().getUserId(), md.getMapName(), md.getCreateTime(), md.getLastUpdateTime(), md.getAccessType());
             dtoList.add(dto);
         }
 

@@ -78,14 +78,14 @@ public class MapDataRepository {
     }
 
     public List<MapData> getOwnedMapList(Long userDataId) {
-        TypedQuery<MapData> query = em.createQuery("SELECT MD FROM MapData AS MD WHERE MD.userData.id = :userDataId ORDER BY MD.mapName", MapData.class);
+        TypedQuery<MapData> query = em.createQuery("SELECT MD FROM MapData AS MD JOIN FETCH MD.userData WHERE MD.userData.id = :userDataId ORDER BY MD.mapName", MapData.class);
         query.setParameter("userDataId", userDataId);
 
         return query.getResultList();
     }
 
     public List<MapData> getPublicMapList() {
-        TypedQuery<MapData> query = em.createQuery("SELECT MD FROM MapData AS MD WHERE MD.accessType = :accessType ORDER BY MD.mapName", MapData.class);
+        TypedQuery<MapData> query = em.createQuery("SELECT MD FROM MapData AS MD JOIN FETCH MD.userData WHERE MD.accessType = :accessType ORDER BY MD.mapName", MapData.class);
         query.setParameter("accessType", AccessType.PUBLIC);
 
         return query.getResultList();
