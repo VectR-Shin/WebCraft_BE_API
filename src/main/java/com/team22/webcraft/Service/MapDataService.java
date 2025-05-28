@@ -10,6 +10,7 @@ import com.team22.webcraft.Repository.MapDataRepository;
 import com.team22.webcraft.Service.File.FileOperator;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -25,7 +27,6 @@ public class MapDataService {
     private final MapDataRepository mapDataRepository;
     private final FileOperator fileOperator;
 
-    // 사용자와의 연계가 아직 안 되어 있음
     public void mapSave(Long userDataId, MultipartFile file, MapSaveDTO mapSaveDTO) throws Exception {
         // if map name already exists
         if (mapDataRepository.checkUserDataId_MapNameExists(userDataId, mapSaveDTO.getMapName()))
@@ -93,12 +94,16 @@ public class MapDataService {
 
     public ResponseEntity<Resource> mapProvide(Long userDataId, MapProvideDTO mapProvideDTO) throws Exception {
         AccessType accessType = mapDataRepository.getAccessType(mapProvideDTO.getMapDataId());
+        Long mapOwnerId = userDataId;
 
         // request other user's private map is not allowed
-        if (accessType == AccessType.PRIVATE)
+        if (accessType == AccessType.PRIVATE) {
             if (!mapDataRepository.checkThisUserOwnedMap(userDataId, mapProvideDTO.getMapDataId()))
                 throw new FileOwnerException("Only file owner can request PRIVATE file provide");
+        } else {// accessType == AccessType.PUBLIC
+            mapOwnerId = mapDataRepository.getMapOwner(mapProvideDTO.getMapDataId());
+        }
 
-        return fileOperator.provideMap(userDataId, mapProvideDTO);
+        return fileOperator.provideMap(mapOwnerId, mapProvideDTO);
     }
 }

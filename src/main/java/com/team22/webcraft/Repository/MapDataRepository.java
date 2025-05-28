@@ -77,6 +77,12 @@ public class MapDataRepository {
         return query.getSingleResult();
     }
 
+    public Long getMapOwner(Long mapDataId) {
+        return em.createQuery("SELECT UD.id FROM MapData AS MD JOIN UserData AS UD ON MD.userData.id = UD.id WHERE MD.id = :mapDataId", Long.class)
+                .setParameter("mapDataId", mapDataId)
+                .getSingleResult();
+    }
+
     public List<MapData> getOwnedMapList(Long userDataId) {
         TypedQuery<MapData> query = em.createQuery("SELECT MD FROM MapData AS MD JOIN FETCH MD.userData WHERE MD.userData.id = :userDataId ORDER BY MD.mapName", MapData.class);
         query.setParameter("userDataId", userDataId);
