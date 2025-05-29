@@ -3,12 +3,15 @@ package com.team22.webcraft.Controller;
 import com.team22.webcraft.Controller.ReturnValue.SuccessReturn;
 import com.team22.webcraft.DTO.UserData.UserDataDTO;
 import com.team22.webcraft.Domain.UserData;
+import com.team22.webcraft.Exception.UserData.DuplicatedIdException;
 import com.team22.webcraft.Interceptor.SessionConst;
 import com.team22.webcraft.Service.UserDataService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,5 +36,10 @@ public class UserDataController {
         session.setMaxInactiveInterval(1800);
 
         return new SuccessReturn("Sign in completed");
+    }
+
+    @ExceptionHandler(DuplicatedIdException.class)
+    public ResponseEntity<String> handleDuplicatedId(DuplicatedIdException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
 }
