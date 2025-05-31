@@ -1,6 +1,8 @@
 # WebCraft
 - Concept: 게임 '테라리아(Terratia)'의 웹 구현, 유저 관리, 맵 정보 관리
-- 
+- Image: <img width="1914" alt="KakaoTalk_20250509_202626879" src="https://github.com/user-attachments/assets/db52d3a1-3d5e-4dce-b86d-311f920c9d90" />
+- Video: https://github.com/user-attachments/assets/b93a67bd-a8e6-4861-a721-e5e4870a90c2
+
 
 ## Back-End
 - Functional Requirement
