@@ -1,4 +1,6 @@
+# WebCraft
 - Concept: 게임 '테라리아(Terratia)'의 웹 구현, 유저 관리, 맵 정보 관리
+- 
 
 ## Back-End
 - Functional Requirement
@@ -38,7 +40,12 @@
   - 맵 삭제: [맵 삭제.txt](https://github.com/user-attachments/files/20532065/default.txt)
 
 - Architecture and Design
-  - UML(draw.io): [Uploading WebCraft.drawio…]()
+  - UML(draw.io): [WebCraft.zip](https://github.com/user-attachments/files/20532076/WebCraft.zip)
+
+- Deployment
+  - DB(MySQL): FreeSQLDatabase
+  - WAS: Render
+    - Docker image 사용하여 배포
 
 
 ## Front-End
